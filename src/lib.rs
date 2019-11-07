@@ -321,6 +321,93 @@ pub trait DrainableBitSet: BitSetLike {
     }
 }
 
+impl<T> BitSetLike for Box<T>
+where
+    T: BitSetLike {
+    #[inline]
+    fn layer3(&self) -> usize {
+        self.as_ref().layer3()
+    }
+
+    #[inline]
+    fn layer2(&self, i: usize) -> usize {
+        self.as_ref().layer2(i)
+    }
+
+    #[inline]
+    fn layer1(&self, i: usize) -> usize {
+        self.as_ref().layer1(i)
+    }
+
+    #[inline]
+    fn layer0(&self, i: usize) -> usize {
+        self.as_ref().layer0(i)
+    }
+
+    #[inline]
+    fn contains(&self, i: Index) -> bool {
+        self.as_ref().contains(i)
+    }
+}
+
+impl<T> BitSetLike for std::rc::Rc<T>
+where
+    T: BitSetLike {
+    #[inline]
+    fn layer3(&self) -> usize {
+        self.as_ref().layer3()
+    }
+
+    #[inline]
+    fn layer2(&self, i: usize) -> usize {
+        self.as_ref().layer2(i)
+    }
+
+    #[inline]
+    fn layer1(&self, i: usize) -> usize {
+        self.as_ref().layer1(i)
+    }
+
+    #[inline]
+    fn layer0(&self, i: usize) -> usize {
+        self.as_ref().layer0(i)
+    }
+
+    #[inline]
+    fn contains(&self, i: Index) -> bool {
+        self.as_ref().contains(i)
+    }
+}
+
+impl<T> BitSetLike for std::sync::Arc<T>
+where
+    T: BitSetLike {
+    #[inline]
+    fn layer3(&self) -> usize {
+        self.as_ref().layer3()
+    }
+
+    #[inline]
+    fn layer2(&self, i: usize) -> usize {
+        self.as_ref().layer2(i)
+    }
+
+    #[inline]
+    fn layer1(&self, i: usize) -> usize {
+        self.as_ref().layer1(i)
+    }
+
+    #[inline]
+    fn layer0(&self, i: usize) -> usize {
+        self.as_ref().layer0(i)
+    }
+
+    #[inline]
+    fn contains(&self, i: Index) -> bool {
+        self.as_ref().contains(i)
+    }
+}
+
 impl<'a, T> BitSetLike for &'a T
 where
     T: BitSetLike + ?Sized,
