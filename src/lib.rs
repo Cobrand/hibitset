@@ -323,7 +323,7 @@ pub trait DrainableBitSet: BitSetLike {
 
 impl<T> BitSetLike for Box<T>
 where
-    T: BitSetLike {
+    T: BitSetLike + ?Sized {
     #[inline]
     fn layer3(&self) -> usize {
         self.as_ref().layer3()
@@ -352,7 +352,7 @@ where
 
 impl<T> BitSetLike for std::rc::Rc<T>
 where
-    T: BitSetLike {
+    T: BitSetLike + ?Sized {
     #[inline]
     fn layer3(&self) -> usize {
         self.as_ref().layer3()
@@ -381,7 +381,7 @@ where
 
 impl<T> BitSetLike for std::sync::Arc<T>
 where
-    T: BitSetLike {
+    T: BitSetLike + ?Sized {
     #[inline]
     fn layer3(&self) -> usize {
         self.as_ref().layer3()
