@@ -85,6 +85,18 @@ where
     }
 }
 
+impl<T: BitSetLike> From<T> for BitIter<T> {
+    /// Create a BitIter from any BitSetLike.
+    fn from(bitsetlike: T) -> Self {
+        let layer3 = bitsetlike.layer3();
+        BitIter {
+            set: bitsetlike,
+            masks: [0, 0, 0, layer3],
+            prefix: [0; 3]
+        }
+    }
+}
+
 impl<T: BitSetLike> BitIter<T> {
     pub(crate) fn handle_level(&mut self, level: usize) -> State {
         use self::State::*;
