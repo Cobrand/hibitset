@@ -79,8 +79,13 @@ pub struct BitSet {
 
 impl BitSet {
     /// Creates an empty `BitSet`.
-    pub fn new() -> BitSet {
-        Default::default()
+    pub const fn new() -> BitSet {
+        BitSet {
+            layer3: 0,
+            layer2: Vec::new(),
+            layer1: Vec::new(),
+            layer0: Vec::new(),
+        }
     }
 
     #[inline]
